@@ -152,6 +152,7 @@ while True:
                         print ("You took damage! You couldn't dodge the attack!")
                         user_health -= damage
                         print (f"Your health is now at {user_health}")
+                        
 
                         # Check with dad, maybe if the player couldn't dodge the attack and took damage but now health is now at 0 or less.
                         # Maybe add the posibility of health at 0 or less?

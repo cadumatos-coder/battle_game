@@ -1,3 +1,21 @@
+def getIntInput(input_msg : str, valid_values : list) -> int:
+    valid = False
+    while not valid:
+        usr_input = input(f"{input_msg}(valid entries: {valid_values}) ")
+        if not usr_input:
+            print("Your input was empty. Try again...")
+            continue
+        if not usr_input.isnumeric():
+            print("Your input needs to be a number. Try again...")
+            continue
+        usr_input_int = int(usr_input)
+        if usr_input_int not in valid_values:
+            print("Your input is not valid. Try again...")
+            continue
+        valid = True
+    return usr_input_int
+    
+    
 
 def main():
     # Import needed libraries
@@ -45,15 +63,15 @@ def main():
         damage = random.randint (least_damage, max_damage)
     
         # Player decision making
-        player_decision = int(input("Do you want to (1) attack or (2) defend? "))
+        player_decision = getIntInput("Do you want to (1) attack or (2) defend? ",[1,2])
         if player_decision == 1: # attack
-            player_weapon = int(input("Do you want to use (1) the hammer, (2) the bow and arrow, or (3) the sword? "))
+            player_weapon = getIntInput("Do you want to use (1) the hammer, (2) the bow and arrow, or (3) the sword? ",[1,2,3])
         elif player_decision == 2: # defend
             if user_shield <= 0:
                 player_defense = 2 # can only dodge since shield is broken
                 print ("Your shield is broken, you can only try to dodge!")        
             else:
-                player_defense = int(input("Do you want to (1) block with your shield, or (2) try to dodge the attack? "))
+                player_defense = getIntInput("Do you want to (1) block with your shield, or (2) try to dodge the attack? ",[1,2])
     
         # Opponent decision making
         opponent_decision = random.choice([1, 2]) # 1: attack, 2: defend

@@ -34,9 +34,9 @@ def main():
     round = 1
     # Game loop
     while True:
-        print("#" * 20)
+        print("#" * 25)
         print(f"# Round {round}")
-        print("#" * 20)
+        print("#" * 25)
         print()
         round += 1
     
@@ -108,8 +108,6 @@ def main():
                         user_shield -= damage
                         print (f"You shield's durability has now gone down to {user_shield}")
     
-                        # Check with dad, maybe I should put if the shield durability has gone down to 0?
-    
                     elif player_defense == 2: # player tries to dodge opponent attack
                         if dodge_percent >= 10: # if random number is equal to or greater than 10 
                             print ("You were able to dodge the attack!")       
@@ -117,8 +115,7 @@ def main():
                             print ("You weren't able to dodge the attack!")
                             user_health -= damage
                             print (f"Your health is now at {user_health}")
-                        # Check with dad, maybe if the player couldn't dodge the attack and took damage but now health is now at 0 or less.
-                        # Maybe add the posibility of health at 0 or less?
+                            
                 elif opponent_decision == 2: # opponent also defends
                     print ("You both defended!")
                     print ("No one has taken damage!")
@@ -144,20 +141,14 @@ def main():
                         print ("You blocked your opponent's attack!")
                         user_shield -= damage
                         print (f"Your shield durability has gone down to {user_shield}")
-                        
-                        # Check with dad, maybe I should put if the shield durability has gone down to 0?
                     
                     elif player_defense == 2: # player tries to dodge the attack
                         if dodge_percent >= 10: # random number is equal to or greater than 10 
                             print ("You were successful in dodging the attack!")
                         elif dodge_percent < 10:
-                            print ("You took damage! You couldn't dodge the attack!")
+                            print ("You took damage! You couldn't dodge the attack! Sorry!")
                             user_health -= damage
                             print (f"Your health is now at {user_health}")
-                            
-    
-                            # Check with dad, maybe if the player couldn't dodge the attack and took damage but now health is now at 0 or less.
-                            # Maybe add the posibility of health at 0 or less?
             
             elif opponent_decision == 2: # opponent defends
                 if player_decision == 2: # player defends
@@ -195,7 +186,6 @@ def main():
         if op_health <= 0:
             print ("You've won! You've defeated your opponent!")
             break
-
 
 if __name__ == "__main__":
     main()

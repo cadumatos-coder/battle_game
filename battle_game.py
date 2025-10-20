@@ -1,3 +1,32 @@
+import os
+
+def print_dashboard(player_container : list, opponent_container : list) -> None:
+    
+    # Greet user
+    print()
+    print ("Hello there! You will fight an opponent until one of you die. You will both start with 100 health!")
+    print ("Good luck!")
+    print()
+    
+    print(f"""
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+#                               #    _ _                      #
+#   O                           #   |o o|                     #
+#  /|\\     health: {player_container[0]:>3}          #   (|.|)      health: {opponent_container[0]:>3}    #
+#   |      shield: {player_container[2]:>3}          #  / | | \\     shield: {opponent_container[2]:>3}    #
+#  / \\                          #    /`\\                      #
+#                               #   (___)                     #
+#                               #                             #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #""")
+
+def clear_console():
+        # For Windows
+        if os.name == 'nt':
+            _ = os.system('cls')
+        # For macOS and Linux
+        else:
+            _ = os.system('clear')
+
 def getIntInput(input_msg : str, valid_values : list) -> int:
     valid = False
     while not valid:
@@ -20,12 +49,6 @@ def getIntInput(input_msg : str, valid_values : list) -> int:
 def main():
     # Import needed libraries
     import random
-    
-    # Greet user
-    print ("Hello there! You will fight an opponent until one of you die. You will both start with 100 health!")
-    print ("Good luck!")
-    print()
-    
     
     # General settings
     max_damage = 50
@@ -60,9 +83,10 @@ def main():
     round = 1
     # Game loop
     while True:
-        print("#" * 25)
-        print(f"# Round {round}")
-        print("#" * 25)
+        clear_console()
+        print_dashboard(player_container, opponent_container)
+        print(f"#                           Round {round:<2}                          #")
+        print("# " * 32)
         print()
         round += 1
     
@@ -228,6 +252,7 @@ def main():
                             opponent_container [0] -= player_container [1]
                             # player_container[1] is user_damage
                             print (f"Your opponent's health is now at {opponent_container [0]}")
+                            
     
         # Next round definitions
         # (Does the player's shield have enough health?)
@@ -250,6 +275,8 @@ def main():
         if opponent_container [0] <= 0:
             print ("You've won! You've defeated your opponent!")
             break
+
+        input("Press enter to continue...")
 
 if __name__ == "__main__":
     main()

@@ -3,6 +3,14 @@ import random
 import os
 
 def print_dashboard(player_container : list, opponent_container : list, player_starts : bool, game_round : int) -> None:
+    '''Prints the game dashboard to the user.
+
+    Args:
+       player_container (list): List with information from the player, like health, decision, etc.
+       opponent_container (list): List with information from the CPU, like health, decision, etc.
+       player_starts (bool): True is the player starts; False if the CPU starts.
+       game_round (int): Int that tells which round the game is on.
+    '''
     # Greet user
     print()
     print ("Hello there! You will fight an opponent until one of you die. You will both start with 100 health!")
@@ -30,6 +38,7 @@ def print_dashboard(player_container : list, opponent_container : list, player_s
     print()
 
 def clear_console():
+        '''Cleans the console from everything that has been printed so far.'''
         # For Windows
         if os.name == 'nt': 
             _ = os.system('cls')
@@ -38,6 +47,16 @@ def clear_console():
             _ = os.system('clear')
 
 def getIntInput(input_msg : str, valid_values : list) -> int:
+    '''Gets an int input from the user. It only proceeds when
+    a valid input is given.
+    
+    Args:
+       input_msg (str): Message to be printed to ask user for an int input.
+       valid_values (list): List of values that are valid for this call.
+    
+    Returns:
+       int: Input from the user as an int type
+       '''
     valid = False
     while not valid:
         usr_input = input(f"{input_msg}(valid entries: {valid_values}) ")
@@ -54,7 +73,12 @@ def getIntInput(input_msg : str, valid_values : list) -> int:
         valid = True
     return usr_input_int
     
-def player_decision_making(player_container):
+def player_decision_making(player_container : list) -> None:
+    '''Gets all decisions that player needs to make.
+    
+    Args: 
+       player_container (list): List with information from the player, like health, decision, etc.
+       '''
     # Player decision making
     # player_container[3] is player_decision
     player_container[3] = getIntInput("Do you want to (1) attack or (2) defend? ",[1,2])
@@ -69,7 +93,12 @@ def player_decision_making(player_container):
         else:
             player_container[5] = getIntInput("Do you want to (1) block with your shield, or (2) try to dodge the attack? ",[1,2])
     
-def opponent_decision_making(opponent_container):
+def opponent_decision_making(opponent_container : list) -> None:
+    '''Gets all decision that CPU makes
+    
+    Args:
+       opponent_container (list): List with information from the CPU, like health, decision, etc.
+        '''
     # Opponent decision making
     opponent_container [3] = random.choice([1, 2]) # 1: attack, 2: defend
     print(f"Your opponent's decision: {opponent_container [3]}") # opponent_container[3] is opponent_decision
@@ -88,7 +117,14 @@ def opponent_decision_making(opponent_container):
         print(f"Your opponent's defense: {opponent_container [5]}") 
     print()
 
-def player1_attacks_player2_defends(attacking_player, defending_player, dodge_percent):
+def player1_attacks_player2_defends(attacking_player : list, defending_player : list, dodge_percent : int) -> None:
+    '''Implements the play out for the game scenario where player 1 attacks and player 2 defends
+    
+    Args:
+        attacking_player (list): List with information from the attacking player, like health, decision, etc.
+        defending_player (list): List with information from the defending player, like health, decision, etc.
+        dodge_percent (int): Odds of which the defending player can or cannot dodge the attack.
+        '''
     # opponent_container[5] is opponent_defense
     if defending_player[5] == 1: # if the opponent blocks the attack with their shield
         print (f"{defending_player[6]} blocked {attacking_player[6]}'s attack with their shield!")
@@ -107,7 +143,16 @@ def player1_attacks_player2_defends(attacking_player, defending_player, dodge_pe
             print (f"{defending_player[6]}'s health has gone down to {defending_player[0]}")
 
 
-def player1_attacks_player2_attacks(starting_player, player2_cont):
+def player1_attacks_player2_attacks(starting_player : list, player2_cont : list) -> bool:
+    '''Implements the play out for the game scenario where player 1 attacks and player 2 defends
+    
+    Args:
+        starting_player (list): List with information from the starting player, like health, decision, etc.
+        player2_cont (list): List with information from the non-starting player, like health, decision, etc.
+
+    Returns:
+        should_break (bool): True if any player's health is less than or equal to 0. False otherwise.
+        '''
     should_break = False
     print ("You both attacked each other! You both received damage!")
     # player2_cont opponent_health

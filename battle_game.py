@@ -2,7 +2,7 @@
 import random
 import os
 
-def print_dashboard(player_container : list, opponent_container : list, player_starts) -> None:
+def print_dashboard(player_container : list, opponent_container : list, player_starts : bool, game_round : int) -> None:
     # Greet user
     print()
     print ("Hello there! You will fight an opponent until one of you die. You will both start with 100 health!")
@@ -25,6 +25,9 @@ def print_dashboard(player_container : list, opponent_container : list, player_s
 #                               #   (___)                     #
 #                               #                             #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #""")
+    print(f"#                           Round {game_round:<2}                          #")
+    print("# " * 32)
+    print()
 
 def clear_console():
         # For Windows
@@ -151,15 +154,12 @@ def main():
     # Decide if player starts
     player_starts = random.choice([True, False])
     
-    round = 1
+    game_round = 1
     # Game loop
     while True:
         clear_console()
-        print_dashboard(player_container, opponent_container, player_starts)
-        print(f"#                           Round {round:<2}                          #")
-        print("# " * 32)
-        print()
-        round += 1
+        print_dashboard(player_container, opponent_container, player_starts, game_round)
+        game_round += 1
     
         # Round settings
         dodge_percent = random.randint (0, 20)
